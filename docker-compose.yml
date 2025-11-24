@@ -2,7 +2,9 @@ version: '3.8'
 services:
   alice.node:
     container_name: "${APP_CONTAINER_PREFIX}_node"
-    build: ./docker/node
+    build:
+      context: .
+      dockerfile: ./docker/node/Dockerfile
     working_dir: ${WORKING_DIR}
     environment:
       NODE_ENV: ${NODE_ENV:-production}
@@ -25,7 +27,7 @@ services:
       - "443:443"
     volumes:
       - ./:${WORKING_DIR}
-      - ./docker/nginx/prod.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./docker/nginx/certs:/etc/letsencrypt
       - ./docker/nginx/certs-data:/data/letsencrypt
     restart: always

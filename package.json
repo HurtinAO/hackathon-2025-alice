@@ -1,0 +1,12 @@
+{
+  "name": "alice-node-app",
+  "version": "1.0.0",
+  "description": "Hackathon 2025, alice project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

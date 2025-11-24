@@ -1,22 +1,20 @@
 # docker/node/Dockerfile
 FROM node:20-alpine
 
-# Рабочая директория внутри контейнера
 WORKDIR /var/www/hackathon-2025-alice
 
-# Сначала копируем файлы зависимостей,
-# чтобы докер кешировал слой с npm ci
-COPY package*.json ./
+# Копируем только манифесты, чтобы слои кешировались
+COPY package.json yarn.lock ./
 
-# Установка прод-зависимостей
-# (если нужны dev-зависимости — убери флаг --only=production)
-RUN npm ci --only=production
+# Устанавливаем зависимости
+# --frozen-lockfile — строго по yarn.lock
+# --production=true — только prod-зависимости
+RUN yarn install --frozen-lockfile
 
-# Копируем остальной код приложения
+# Копируем остальной код
 COPY . .
 
-# Порт, на котором слушает Node (прокидываешь на него из nginx)
 EXPOSE 3000
 
-# Старт команды — опираемся на "scripts.start" в package.json
-CMD ["npm", "run", "start"]
+# Если в package.json есть "start": "node index.js" или что-то своё
+CMD ["yarn", "start"]
