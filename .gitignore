@@ -1,0 +1,13 @@
+
+###> symfony/framework-bundle ###
+.env
+/.env.local
+/.env.local.php
+/.env.*.local
+
+/docker/nginx/certs/
+/client-transfer/
+
+.idea
+dev-tmp
+
