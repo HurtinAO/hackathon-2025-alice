@@ -25,7 +25,7 @@ services:
       - "443:443"
     volumes:
       - ./:${WORKING_DIR}
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/prod.conf:/etc/nginx/conf.d/default.conf
       - ./docker/nginx/certs:/etc/letsencrypt
       - ./docker/nginx/certs-data:/data/letsencrypt
     restart: always
