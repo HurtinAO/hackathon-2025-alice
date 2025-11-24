@@ -8,8 +8,6 @@ services:
     working_dir: ${WORKING_DIR}
     environment:
       NODE_ENV: ${NODE_ENV:-production}
-    volumes:
-      - ./:${WORKING_DIR}
     restart: always
     logging:
       driver: "json-file"
